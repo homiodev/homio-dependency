@@ -10,20 +10,20 @@
 
     <version>2.4.4</version>
 
-    <groupId>org.touchhome</groupId>
-    <artifactId>touchhome-dependency</artifactId>
+    <groupId>org.homio</groupId>
+    <artifactId>homio-dependency</artifactId>
     <packaging>pom</packaging>
 
-    <name>Touchhome :: BOM (Bill of Materials) Parent</name>
+    <name>Homio :: BOM (Bill of Materials) Parent</name>
     <description>${project.name}</description>
-    <url>https://github.com/touchhome/touchhome-dependency</url>
+    <url>https://github.com/homio/homio-dependency</url>
 
     <scm child.scm.connection.inherit.append.path="false"
       child.scm.developerConnection.inherit.append.path="false"
       child.scm.url.inherit.append.path="false">
-        <url>https://github.com/touchhome/${artifactId}</url>
-        <connection>scm:git:https://github.com/touchhome/${artifactId}.git</connection>
-        <developerConnection>scm:git:https://github.com/touchhome/${artifactId}.git</developerConnection>
+        <url>https://github.com/homio/${artifactId}</url>
+        <connection>scm:git:https://github.com/homio/${artifactId}.git</connection>
+        <developerConnection>scm:git:https://github.com/homio/${artifactId}.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

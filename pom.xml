@@ -16,14 +16,14 @@
 
     <name>Homio :: BOM (Bill of Materials) Parent</name>
     <description>${project.name}</description>
-    <url>https://github.com/homio/homio-dependency</url>
+    <url>https://github.com/homiodev/homio-dependency</url>
 
     <scm child.scm.connection.inherit.append.path="false"
       child.scm.developerConnection.inherit.append.path="false"
       child.scm.url.inherit.append.path="false">
-        <url>https://github.com/homio/${project.artifactId}</url>
-        <connection>scm:git:https://github.com/homio/${project.artifactId}.git</connection>
-        <developerConnection>scm:git:https://github.com/homio/${project.artifactId}.git</developerConnection>
+        <url>https://github.com/homiodev/${project.artifactId}</url>
+        <connection>scm:git:https://github.com/homiodev/${project.artifactId}.git</connection>
+        <developerConnection>scm:git:https://github.com/homiodev/${project.artifactId}.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 

@@ -1,6 +1,11 @@
-name: CI
+name: Maven release
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Description'
+        required: true
 
 jobs:
   build:
@@ -16,13 +21,18 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
+      - name: Configure Git User
+        run: |
+          git config user.email "release@github.com"
+          git config user.name "GitHub Release Action"
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v1
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Build with Maven
-        run: mvn -B clean package deploy
+      - name: Release:prepare
+        run: mvn -B release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true"
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}

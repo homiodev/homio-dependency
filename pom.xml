@@ -208,7 +208,7 @@
             <dependency>
                 <groupId>com.github.hypfvieh</groupId>
                 <artifactId>dbus-java</artifactId>
-                <version>3.3.2</version>
+                <version>2.7.1</version>
             </dependency>
             <dependency>
                 <groupId>com.fazecast</groupId>
@@ -366,27 +366,6 @@
                     <tagNameFormat>@{project.version}</tagNameFormat>
                 </configuration>
                 <groupId>org.apache.maven.plugins</groupId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <id>attach-javadocs</id>
-                        <phase>package</phase>
-                        <configuration>
-                            <additionalOptions>-Xdoclint:all -Xdoclint:-missing</additionalOptions>
-                            <additionalJOptions>
-                                <additionalJOption>-Xdoclint:all</additionalJOption>
-                                <additionalJOption>-Xdoclint:-missing</additionalJOption>
-                            </additionalJOptions>
-                        </configuration>
-                    </execution>
-                </executions>
-                <groupId>org.apache.maven.plugins</groupId>
-                <version>3.5.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

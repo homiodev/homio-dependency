@@ -52,7 +52,7 @@
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <proto.version>4.29.2</proto.version>
-        <grpc.version>1.69.0</grpc.version>
+        <grpc.version>1.70.0</grpc.version>
     </properties>
 
     <dependencyManagement>

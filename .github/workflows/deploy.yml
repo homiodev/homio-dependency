@@ -43,3 +43,15 @@ jobs:
 
       - name: Build & Publish
         run: mvn clean deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Trigger Project Builds for All Repositories
+        run: |
+          REPOS=(
+            "homiodev/homio-api"
+          )
+          for REPO in "${REPOS[@]}"; do
+            echo "Triggering build for $REPO"
+            curl -X POST https://api.github.com/repos/$REPO/dispatches \
+              -H "Authorization: token ${{ secrets.GH_PAT }}" \
+              -d '{"event_type": "trigger-build"}'
+          done

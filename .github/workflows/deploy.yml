@@ -1,4 +1,4 @@
-name: Publish to GitHub Packages
+name: Build Project A
 
 on:
   push:
@@ -6,10 +6,8 @@ on:
       - master
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -18,11 +16,15 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
-          server-id: github
-          settings-path: ${{ github.workspace }}
+          java-version: '17'
 
-      - name: Build & Deploy
-        run: mvn clean deploy
+      - name: Import GPG Key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          gpgconf --reload gpg-agent
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_TTY: /dev/tty
+
+      - name: Build & Sign with Maven
+        run: mvn clean verify -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}

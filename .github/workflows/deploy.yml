@@ -1,4 +1,4 @@
-name: Build homio-dependency
+name: Build & Publish homio-dependency
 
 on:
   push:
@@ -17,6 +17,21 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          server-id: github
+          settings-path: ${{ github.workspace }}
+
+      - name: Configure Maven settings
+        run: |
+          mkdir -p ~/.m2
+          echo '<settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ secrets.MAVEN_USERNAME }}</username>
+                <password>${{ secrets.GITHUB_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>' > ~/.m2/settings.xml
 
       - name: Import GPG Key
         run: |
@@ -26,5 +41,5 @@ jobs:
         env:
           GPG_TTY: /dev/tty
 
-      - name: Build & Sign with Maven
-        run: mvn clean verify -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
+      - name: Build & Publish
+        run: mvn clean deploy -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
